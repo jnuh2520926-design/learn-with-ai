@@ -33,7 +33,21 @@ def chat():
     elif selected_function == "hint":
         # [기능 4: 개념접근 및 힌트]
         prompt = f"정답을 주지 말고 문제를 풀 수 있는 핵심 개념과 힌트만 줘: {user_input}"
-        ai_reply = # 여기에 gpt api 코드 넣어서 프롬프트 입력받고 출력하기 
+         MODEL = "gpt-3.5-turbo"
+         USER_INPUT_MSG = prompt
+
+        response = openai.ChatCompletion.create(
+        model=MODEL,
+        messages=[
+               {"role": "system", "content": "You are a helpful assistant."},
+               {"role": "user", "content": USER_INPUT_MSG}, 
+               {"role": "assistant", "content": "Who's there?"},
+                ],
+       temperature=0,
+        )
+
+        response
+         ai_reply = # 여기에 gpt api 코드 넣어서 프롬프트 입력받고 출력하기 
 
     else:
         prompt = user_input
