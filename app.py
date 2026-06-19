@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, jsonify
+from google import genai 
 
 app = Flask(__name__)
 
@@ -17,8 +18,15 @@ def chat():
     if selected_function == "explain":
         # [기능 1: 문제 해설] - 바로 답 안 주고 되묻기 기획 반영
         prompt = f"학생의 생각 과정을 고정해주는 과외 선생님처럼 말해줘. 질문: {user_input}"
-        ai_reply = f"야[해설 모드] 이 문제 풀 때 무슨 생각부터 했어? {user_input}에서 막힌 이유를 말해봐봐"
-        # 여기에 gpt api 코드 넣어서 프롬프트 입력받고 출력하기 
+        ai_reply = f"야[해설 모드] 이 문제 풀 때 무슨 생각부터 했어? {user_input}에서 막힌 이유를 말해봐"
+        # 여기에 gpt api 코드 넣어서 프롬프트 입력받고 출력하기
+        client = genai.Client()
+        response = client.modesl.generate_content(
+            model="gemini_2.5-flash",
+            contents=prompt
+        ) 
+        #print (response.text)
+
 
     elif selected_function == "quiz":
         # [기능 2: 퀴즈 생성]
